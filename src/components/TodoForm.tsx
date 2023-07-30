@@ -1,16 +1,11 @@
-import { ITodo, ITodoInput } from '@/redux/interface/todo'
-import { Autocomplete, Box, Button, Chip, Paper, Typography, createFilterOptions } from '@mui/material'
-import { useState } from 'react'
+import { ITodoInput } from '@/redux/interface/todo'
+import { Box, Button, Chip, Paper, Typography } from '@mui/material'
 import {
   FormContainer,
   SubmitHandler,
   TextFieldElement,
   TextareaAutosizeElement,
   AutocompleteElement,
-  useForm,
-  useFormContext,
-  Control,
-  FormState,
 } from 'react-hook-form-mui'
 import { useNavigate } from 'react-router'
 
@@ -19,28 +14,15 @@ export interface TodoFormProps {
   onSuccess: SubmitHandler<any>
 }
 
-const filter = createFilterOptions<string>()
-
 function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
   const navigate = useNavigate()
-  const [value, setValue] = useState<string>('')
-
-  const [tags, setTags] = useState<string[]>([])
-
   const onClickGoBack = () => {
     navigate(-1)
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('Data submitted: ', data)
-  }
-
-  const detectable = false
-
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3 }, p: { xs: 2, md: 2 } }}>
-      <FormContainer defaultValues={defaultValues} onSuccess={onSuccess} handleSubmit={handleSubmit}>
+      <FormContainer defaultValues={defaultValues} onSuccess={onSuccess}>
         <TextFieldElement
           id="title"
           name="title"
@@ -66,7 +48,7 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
         <AutocompleteElement
           name="tags"
           multiple
-          options={tags}
+          options={[] as string[]}
           label="태그"
           autocompleteProps={{
             freeSolo: true,
