@@ -1,3 +1,26 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "env": {
+    // 전역객체를 eslint가 인식하는 구간
+    "browser": true, // document나 window 인식되게 함
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended", // eslint formatting with prettier
+    "prettier" // avoid crash with eslint - prettier
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }
