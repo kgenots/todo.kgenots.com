@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "set NEXT_PUBLIC_STAGE=prod && next build && touch build/.nojekyll && echo todo.kgenots.com > build/CNAME && gh-pages -d build -b gh-pages -r git@github.com:kgenots/todo.kgenots.com.git"
   },
   "dependencies": {
     "@types/node": "20.4.5",
