@@ -10,6 +10,8 @@ import {
 
 import { ITodoInput } from '@/redux/interface/todo'
 
+import { Validation } from '@/validations'
+
 export interface TodoFormProps {
   defaultValues: ITodoInput
   onSuccess: SubmitHandler<any>
@@ -27,7 +29,17 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
         <Typography variant="h6" gutterBottom my={1}>
           필수
         </Typography>
-        <TextFieldElement id="title" name="title" label="제목" placeholder="제목을 입력해주세요" required />
+        <TextFieldElement
+          id="title"
+          name="title"
+          label="제목"
+          placeholder="제목을 입력해주세요"
+          required
+          validation={{
+            required: '제목을 입력해주세요',
+            validate: Validation.TodoFormTitleValidate,
+          }}
+        />
         <br />
         <TextareaAutosizeElement
           id="description"
@@ -38,6 +50,10 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
           margin={'dense'}
           rows={10}
           required
+          validation={{
+            required: '내용을 입력해주세요',
+            validate: Validation.TodoFormDescriptionValidate,
+          }}
         ></TextareaAutosizeElement>
         <Divider sx={{ m: { xs: 1, sm: 3 }, mb: 0 }} />
         <Typography variant="h6" gutterBottom my={1}>
@@ -56,6 +72,9 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
               value.map((option: any, index: any) => (
                 <Chip variant="filled" label={option} {...getTagProps({ index })} />
               )),
+          }}
+          textFieldProps={{
+            placeholder: '(선택) 단어를 입력 후 Enter를 치면 태그가 등록됩니다',
           }}
         />
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
