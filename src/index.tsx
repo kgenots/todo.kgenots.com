@@ -1,19 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import CssBaseline from '@mui/material/CssBaseline'
-import { ThemeProvider } from '@mui/material/styles'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
-import App from './app'
-import theme from './theme'
-import { ReduxProvider } from './redux/provider'
+import App from '@/App'
+import { ReduxProvider } from '@/redux/provider'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+import '@/assets/scss/style.scss'
+
+import config from '@/config'
+
+const container = document.getElementById('root')
+const root = createRoot(container!)
+root.render(
+  <StrictMode>
     <ReduxProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <BrowserRouter basename={config.basename}>
         <App />
-      </ThemeProvider>
+      </BrowserRouter>
     </ReduxProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 )

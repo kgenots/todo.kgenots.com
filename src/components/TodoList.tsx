@@ -1,16 +1,15 @@
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { styled } from '@mui/material/styles'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp'
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
-import Typography from '@mui/material/Typography'
-
-import { useAppSelector } from '@/redux/hooks'
+import { Box, Button, Typography } from '@mui/material'
 
 import { ITodo } from '@/redux/interface/todo'
-import { Box, Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '@/redux/hooks'
 
 const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
   ({ theme }) => ({
@@ -31,9 +30,6 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
   flexDirection: 'row',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
-  },
-  '& .MuiAccordionSummary-content': {
-    marginLeft: theme.spacing(1),
   },
 }))
 
@@ -64,12 +60,20 @@ function TodoList() {
               <Typography>{todo.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>{todo.description}</Typography>
-              <Typography fontSize={12}>{todo.created_date}</Typography>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button type="button" variant="contained" sx={{ mt: 1, ml: 1 }} onClick={() => onClickDetail(idx)}>
-                  상세 페이지
-                </Button>
+              {/* <Typography>{todo.description}</Typography> */}
+              <Box>
+                <Typography fontSize={12}>{todo.created_date}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button
+                    type="button"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ mt: 1, ml: 1 }}
+                    onClick={() => onClickDetail(idx)}
+                  >
+                    상세 페이지
+                  </Button>
+                </Box>
               </Box>
             </AccordionDetails>
           </Accordion>

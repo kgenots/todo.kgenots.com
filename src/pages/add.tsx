@@ -1,9 +1,13 @@
-import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { addTodo } from '@/redux/features/todo-slice'
-import { useAppDispatch } from '@/redux/hooks'
+
+import { Grid, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
+
 import TodoForm from '@/components/TodoForm'
+import ContentWrapper from '@/components/ContentWrapper'
+import CardWrapper from '@/components/CardWrapper'
 import { ITodoInput } from '@/redux/interface/todo'
+import { useAppDispatch } from '@/redux/hooks'
+import { addTodo } from '@/redux/features/todo-slice'
 
 const defaultValues = {
   title: '',
@@ -17,11 +21,11 @@ type FormValues = {
   tags: string[]
 }
 
-//TODO: Chip component
-
-function AddTodo() {
+const AddTodo = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const theme = useTheme()
+  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'))
 
   const onSuccess = (data: FormValues) => {
     try {
@@ -33,12 +37,44 @@ function AddTodo() {
   }
 
   return (
-    <>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Todo 추가 페이지
-      </Typography>
-      <TodoForm defaultValues={defaultValues} onSuccess={onSuccess} />
-    </>
+    <ContentWrapper>
+      <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
+            <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
+              <CardWrapper>
+                <Grid item xs={12}>
+                  <Grid
+                    container
+                    direction={matchDownSM ? 'column-reverse' : 'row'}
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Grid item>
+                      <Stack alignItems="center" justifyContent="center" spacing={1} mb={2}>
+                        <Typography
+                          color={theme.palette.secondary.main}
+                          gutterBottom
+                          variant={matchDownSM ? 'h3' : 'h2'}
+                        >
+                          Todo 추가 페이지
+                        </Typography>
+                        <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
+                          Todo를 추가하는 페이지입니다.
+                        </Typography>
+                      </Stack>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <TodoForm defaultValues={defaultValues} onSuccess={onSuccess} />
+                </Grid>
+              </CardWrapper>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </ContentWrapper>
   )
 }
 

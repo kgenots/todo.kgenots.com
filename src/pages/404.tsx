@@ -16,7 +16,7 @@ function NotFound() {
           <Typography variant="h6" my={2}>
             The page you’re looking for doesn’t exist.
           </Typography>
-          <Button href="/" color="primary">
+          <Button href="/" variant="contained" color="secondary">
             Back Home
           </Button>
         </Grid>

@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ITodo } from '../interface/todo'
-import { getCurrentDateString } from '@/util/date-helper'
+
+import { ITodo } from '@/redux/interface/todo'
 import { RootState } from '@/redux/store'
+import { getCurrentDateString } from '@/util/date-helper'
 
 let nextId = 0
 
@@ -11,7 +12,7 @@ const initialState: ITodo[] = [
     title: 'Example 제목 #0',
     description: 'Example Description',
     tags: ['Ex1', 'Ex2'],
-    created_date: '2023-07-30T06:12:14.214Z',
+    created_date: '2023년 7월 31일 월요일 / 16시 54분 55초',
   } as ITodo,
 ]
 

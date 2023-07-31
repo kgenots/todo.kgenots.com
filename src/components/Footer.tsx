@@ -17,6 +17,8 @@ function Footer() {
   return (
     <>
       <Box
+        position="sticky"
+        bottom={0}
         component="footer"
         sx={{
           py: 3,

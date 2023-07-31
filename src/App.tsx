@@ -1,25 +1,22 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './app.css'
+// routing
+import Routes from '@/routes'
 
-import MainLayout from './layout/MainLayout'
+// defaultTheme
+import themes from '@/themes'
 
-import Todos from './pages/index'
-import AddTodo from './pages/add'
-import DetailTodo from './pages/detail'
-import NotFound from './pages/404'
+import { CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material'
+import NavigationScroll from './layout/NavigationScroll'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/add" element={<AddTodo />}></Route>
-          <Route path="/detail/:id" element={<DetailTodo />}></Route>
-          <Route path="/" element={<Todos />}></Route>
-        </Route>
-        <Route path="/*" element={<NotFound />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themes()}>
+        <CssBaseline />
+        <NavigationScroll>
+          <Routes />
+        </NavigationScroll>
+      </ThemeProvider>
+    </StyledEngineProvider>
   )
 }
 

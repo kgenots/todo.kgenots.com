@@ -1,5 +1,5 @@
-import { ITodoInput } from '@/redux/interface/todo'
-import { Box, Button, Chip, Paper, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { Box, Button, Chip, Divider, Paper, Typography } from '@mui/material'
 import {
   FormContainer,
   SubmitHandler,
@@ -7,7 +7,8 @@ import {
   TextareaAutosizeElement,
   AutocompleteElement,
 } from 'react-hook-form-mui'
-import { useNavigate } from 'react-router'
+
+import { ITodoInput } from '@/redux/interface/todo'
 
 export interface TodoFormProps {
   defaultValues: ITodoInput
@@ -23,14 +24,10 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3 }, p: { xs: 2, md: 2 } }}>
       <FormContainer defaultValues={defaultValues} onSuccess={onSuccess}>
-        <TextFieldElement
-          id="title"
-          name="title"
-          label="제목"
-          placeholder="제목을 입력해주세요"
-          required
-          margin={'dense'}
-        />
+        <Typography variant="h6" gutterBottom my={1}>
+          필수
+        </Typography>
+        <TextFieldElement id="title" name="title" label="제목" placeholder="제목을 입력해주세요" required />
         <br />
         <TextareaAutosizeElement
           id="description"
@@ -40,9 +37,10 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
           placeholder="내용을 입력해주세요"
           margin={'dense'}
           rows={10}
+          required
         ></TextareaAutosizeElement>
-        <br />
-        <Typography variant="h6" gutterBottom mt={2}>
+        <Divider sx={{ m: { xs: 1, sm: 3 }, mb: 0 }} />
+        <Typography variant="h6" gutterBottom my={1}>
           기타
         </Typography>
         <AutocompleteElement
@@ -53,7 +51,6 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
           autocompleteProps={{
             freeSolo: true,
             disableClearable: true,
-            limitTags: 5,
             isOptionEqualToValue: (option, value) => option === value,
             renderTags: (value, getTagProps) =>
               value.map((option: any, index: any) => (
@@ -62,10 +59,10 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
           }}
         />
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button type="submit" variant="contained" sx={{ mt: 3, ml: 1 }}>
+          <Button type="submit" variant="contained" color="secondary" sx={{ mt: 3, ml: 1 }}>
             제출
           </Button>
-          <Button type="button" variant="outlined" sx={{ mt: 3, ml: 1 }} onClick={onClickGoBack}>
+          <Button type="button" variant="outlined" color="secondary" sx={{ mt: 3, ml: 1 }} onClick={onClickGoBack}>
             돌아가기
           </Button>
         </Box>
