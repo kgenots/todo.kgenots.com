@@ -7,7 +7,7 @@ const CardWrapper = ({ children, ...other }: any) => (
   <MainCard
     sx={{
       maxWidth: { xs: 400, lg: 475 },
-      minWidth: { xs: '70vw', lg: '40vw' },
+      minWidth: { xs: '85vw', lg: '40vw' },
       width: '100%',
       margin: 'auto',
       '& > *': {
