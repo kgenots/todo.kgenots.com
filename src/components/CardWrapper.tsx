@@ -6,9 +6,10 @@ import MainCard from '@/components/cards/MainCard'
 const CardWrapper = ({ children, ...other }: any) => (
   <MainCard
     sx={{
-      minWidth: { xs: 400, lg: 475 },
       maxWidth: { xs: 400, lg: 475 },
-      margin: { xs: 2.5, md: 3 },
+      minWidth: { xs: '70vw', lg: '40vw' },
+      width: '100%',
+      margin: 'auto',
       '& > *': {
         flexGrow: 1,
         flexBasis: '50%',
