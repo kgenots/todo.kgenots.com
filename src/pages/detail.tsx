@@ -17,7 +17,7 @@ function DetailTodo() {
   const theme = useTheme()
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'))
 
-  const todo = useAppSelector((state) => getTodo(state, Number(id))) as ITodo
+  const todo = useAppSelector((state) => getTodo(state, id as string)) as ITodo
   const mode = query.get('m')
 
   const onSuccess = (data: ITodoInput) => {

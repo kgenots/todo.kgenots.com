@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { ITodo } from '@/redux/interface/todo'
+import { ITodo, ITodoInput } from '@/redux/interface/todo'
 import { RootState } from '@/redux/store'
 import { getCurrentDateString } from '@/util/date-helper'
+import Hashids from 'hashids'
 
-let nextId = 0
+function generateUID(str: string) {
+  var hashids = new Hashids(str)
+  return hashids.encode(1, 2, 3, 4, 5, 6, 7, 8)
+}
 
 const initialState: ITodo[] = [
   {
-    id: nextId,
+    id: 'example',
     title: 'Example 제목 #0',
     description: 'Example Description',
     tags: ['Ex1', 'Ex2'],
@@ -24,22 +28,25 @@ export const todo = createSlice({
       reducer: (state, { payload }: PayloadAction<ITodo>) => {
         state.push(payload)
       },
-      prepare: ({ title, description, tags }: { title: string; description: string; tags: string[] }) => ({
-        payload: {
-          id: nextId++,
-          title,
-          description,
-          tags,
-          created_date: getCurrentDateString(),
-        } as ITodo,
-      }),
+      prepare: ({ title, description, tags }: ITodoInput) => {
+        const now = getCurrentDateString()
+        return {
+          payload: {
+            id: generateUID(now),
+            title,
+            description,
+            tags,
+            created_date: now,
+          } as ITodo,
+        }
+      },
     },
     editTodo: (
       state,
       {
         payload,
       }: PayloadAction<{
-        id: number
+        id: string
         title: string
         description: string
         tags: string[]
@@ -55,7 +62,7 @@ export const todo = createSlice({
   },
 })
 
-export const getTodo = (state: RootState, id: number): ITodo => state.todos.find((todo) => todo.id === id) as ITodo
+export const getTodo = (state: RootState, id: string): ITodo => state.todos.find((todo) => todo.id === id) as ITodo
 
 export const { addTodo, editTodo } = todo.actions
 export default todo.reducer

@@ -40,22 +40,22 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 function TodoList() {
   const navigate = useNavigate()
-  const [expanded, setExpanded] = React.useState<string | false>('p0')
+  const [expanded, setExpanded] = React.useState<string | false>('pexample')
   const todos: ITodo[] = useAppSelector((state) => state.todos)
 
   const handleChange = (panel: string) => (_: React.SyntheticEvent, newExpanded: boolean) => {
     setExpanded(newExpanded ? panel : false)
   }
 
-  const onClickDetail = (idx: number) => {
-    navigate(`/detail/${idx}`)
+  const onClickDetail = (id: string) => {
+    navigate(`/detail/${id}`)
   }
 
   return (
     <div>
       {todos &&
         todos.map((todo, idx) => (
-          <Accordion key={'p' + idx} expanded={expanded === 'p' + idx} onChange={handleChange('p' + idx)}>
+          <Accordion key={'p' + todo.id} expanded={expanded === 'p' + todo.id} onChange={handleChange('p' + todo.id)}>
             <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
               <Typography>{todo.title}</Typography>
             </AccordionSummary>
@@ -68,7 +68,7 @@ function TodoList() {
                     variant="contained"
                     color="secondary"
                     sx={{ mt: 1, ml: 1 }}
-                    onClick={() => onClickDetail(idx)}
+                    onClick={() => onClickDetail(todo.id)}
                   >
                     상세 페이지
                   </Button>

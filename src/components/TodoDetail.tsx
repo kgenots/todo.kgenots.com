@@ -33,9 +33,9 @@ function TodoDetail({ todo }: TodoDetailProps) {
         태그 목록
       </Typography>
       <Box>
-        {todo.tags &&
-          todo.tags.length > 0 &&
-          todo.tags.map((tag, idx) => {
+        {todo?.tags &&
+          todo?.tags.length > 0 &&
+          todo?.tags.map((tag, idx) => {
             return <Chip key={idx} label={tag} style={{ marginLeft: 5, paddingLeft: 5, paddingRight: 5 }} />
           })}
       </Box>
