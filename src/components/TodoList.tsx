@@ -60,7 +60,6 @@ function TodoList() {
               <Typography>{todo.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {/* <Typography>{todo.description}</Typography> */}
               <Box>
                 <Typography fontSize={12}>{todo.created_date}</Typography>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

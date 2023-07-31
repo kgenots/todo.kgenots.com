@@ -4,8 +4,6 @@ import { Grid, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 
 import TodoForm from '@/components/TodoForm'
 import TodoDetail from '@/components/TodoDetail'
-import CardWrapper from '@/components/CardWrapper'
-import ContentWrapper from '@/components/ContentWrapper'
 import { ITodo, ITodoInput } from '@/redux/interface/todo'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { getTodo, editTodo } from '@/redux/features/todo-slice'
@@ -32,48 +30,25 @@ function DetailTodo() {
   }
 
   return (
-    <ContentWrapper>
-      <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
-            <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-              <CardWrapper>
-                <Grid item xs={12}>
-                  <Grid
-                    container
-                    direction={matchDownSM ? 'column-reverse' : 'row'}
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Grid item>
-                      <Stack alignItems="center" justifyContent="center" spacing={1} mb={2}>
-                        <Typography
-                          color={theme.palette.secondary.main}
-                          gutterBottom
-                          variant={matchDownSM ? 'h3' : 'h2'}
-                        >
-                          {mode && mode === 'edit' ? 'Todo 수정 페이지' : 'Todo 상세 페이지'}
-                        </Typography>
-                        <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
-                          {mode && mode === 'edit' ? 'Todo를 수정하는 페이지입니다.' : 'Todo를 보여주는 페이지입니다.'}
-                        </Typography>
-                      </Stack>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                  {mode && mode === 'edit' ? (
-                    <TodoForm defaultValues={todo} onSuccess={onSuccess} />
-                  ) : (
-                    <TodoDetail todo={todo} />
-                  )}
-                </Grid>
-              </CardWrapper>
-            </Grid>
+    <>
+      <Grid item xs={12}>
+        <Grid container direction={matchDownSM ? 'column-reverse' : 'row'} alignItems="center" justifyContent="center">
+          <Grid item>
+            <Stack alignItems="center" justifyContent="center" spacing={1} mb={2}>
+              <Typography color={theme.palette.secondary.main} gutterBottom variant={matchDownSM ? 'h3' : 'h2'}>
+                {mode && mode === 'edit' ? 'Todo 수정 페이지' : 'Todo 상세 페이지'}
+              </Typography>
+              <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
+                {mode && mode === 'edit' ? 'Todo를 수정하는 페이지입니다.' : 'Todo를 보여주는 페이지입니다.'}
+              </Typography>
+            </Stack>
           </Grid>
         </Grid>
       </Grid>
-    </ContentWrapper>
+      <Grid item xs={12}>
+        {mode && mode === 'edit' ? <TodoForm defaultValues={todo} onSuccess={onSuccess} /> : <TodoDetail todo={todo} />}
+      </Grid>
+    </>
   )
 }
 

@@ -47,8 +47,6 @@ export default function themePalette(theme: any): PaletteOptions {
     text: {
       primary: theme.darkTextPrimary,
       secondary: theme.darkTextSecondary,
-      // dark: theme.textDark,
-      // hint: theme.colors?.grey100,
     },
     background: {
       paper: theme.paper,

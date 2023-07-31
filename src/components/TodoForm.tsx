@@ -24,7 +24,7 @@ function TodoForm({ defaultValues, onSuccess }: TodoFormProps) {
   }
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3 }, p: { xs: 2, md: 2 } }}>
+    <Paper variant="outlined" sx={{ mb: { xs: 3 }, p: { xs: 2, md: 2 } }}>
       <FormContainer defaultValues={defaultValues} onSuccess={onSuccess}>
         <Typography variant="h6" gutterBottom my={1}>
           필수

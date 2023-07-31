@@ -17,7 +17,7 @@ function TodoDetail({ todo }: TodoDetailProps) {
     navigate(`/`)
   }
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3 }, p: { xs: 2, md: 2 } }}>
+    <Paper variant="outlined" sx={{ mb: { xs: 3 }, p: { xs: 2, md: 2 } }}>
       <Typography variant="h3" gutterBottom>
         {todo?.title}
       </Typography>
