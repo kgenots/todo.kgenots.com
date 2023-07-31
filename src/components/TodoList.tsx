@@ -54,9 +54,9 @@ function TodoList() {
   return (
     <div>
       {todos &&
-        todos.map((todo, idx) => (
+        todos.map((todo, _) => (
           <Accordion key={'p' + todo.id} expanded={expanded === 'p' + todo.id} onChange={handleChange('p' + todo.id)}>
-            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+            <AccordionSummary>
               <Typography>{todo.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
